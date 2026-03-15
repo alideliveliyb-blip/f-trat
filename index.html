@@ -1,266 +1,187 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="tr">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2299.77">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.7px Arial; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
-    span.s1 {font-kerning: none}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KBA - Kendilik Bilinci Akademisi</title>
+    <style>
+        :root {
+            --gold: #d4af37; --bg: #050505; --card: #121212;
+            --olur: #4ecca3; --sikinti: #fca311; --olmaz: #e94560; --azam: #ff00ff;
+        }
+        body { font-family: 'Garamond', serif; background: var(--bg); color: #e0e0e0; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .app-container { width: 95%; max-width: 900px; background: var(--card); padding: 50px; border-radius: 30px; box-shadow: 0 0 60px rgba(212, 175, 55, 0.15); border: 1px solid #222; text-align: center; position: relative; }
+        
+        /* Marka Kimliği */
+        .logo { font-size: 65px; font-weight: bold; color: var(--gold); letter-spacing: 8px; margin-bottom: 5px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .kba-sub { font-size: 16px; color: var(--gold); letter-spacing: 3px; margin-bottom: 40px; text-transform: uppercase; }
+
+        /* Ekran Yönetimi */
+        .screen { display: none; animation: slideUp 0.6s ease-out forwards; }
+        .active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Estetik Elemanlar */
+        input { background: #1a1a1a; border: 1px solid #333; padding: 15px; color: white; border-radius: 10px; margin: 10px; width: 70%; font-size: 16px; text-align: center; }
+        input:focus { border-color: var(--gold); outline: none; }
+        .btn { background: var(--gold); color: #000; border: none; padding: 18px 40px; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 25px; font-size: 16px; letter-spacing: 1px; transition: 0.4s; }
+        .btn:hover { background: #fff; transform: scale(1.05); box-shadow: 0 0 20px var(--gold); }
+
+        .manifesto-box { text-align: justify; font-style: italic; line-height: 1.8; background: #0a0a0a; padding: 30px; border-radius: 15px; border-right: 4px solid var(--gold); margin: 30px 0; font-size: 18px; }
+
+        /* Ev Seçim Alanı */
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; margin-top: 30px; }
+        .house-node { background: #1a1a1a; border: 1px solid #333; padding: 20px; border-radius: 15px; cursor: pointer; transition: 0.3s; font-weight: bold; }
+        .house-node:hover { border-color: var(--gold); background: #222; }
+
+        /* Detay Kartı */
+        .detail-view { background: #0a0a0a; border: 1px solid var(--gold); padding: 30px; margin-top: 30px; border-radius: 20px; display: flex; align-items: center; text-align: left; gap: 30px; }
+        .planet-img { width: 150px; height: 150px; border-radius: 50%; border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+
+        .badge { padding: 6px 12px; border-radius: 6px; font-size: 14px; text-transform: uppercase; font-weight: bold; }
+        .bg-azam { background: var(--azam); color: white; }
+        .bg-olur { background: var(--olur); color: black; }
+        .bg-sikinti { background: var(--sikinti); color: black; }
+        .bg-olmaz { background: var(--olmaz); color: white; }
+
+        footer { margin-top: 50px; font-size: 13px; color: #555; border-top: 1px solid #222; padding-top: 25px; line-height: 1.6; }
+    </style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="tr"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;meta charset="UTF-8"&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;title&gt;KBA - Zihin Dünyası Denetimi&lt;/title&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;style&gt;</span></p>
-<p class="p1"><span class="s1">        :root { </span></p>
-<p class="p1"><span class="s1">            --kba-ana: #1b4d3e; </span></p>
-<p class="p1"><span class="s1">            --kba-beyaz: #ffffff; </span></p>
-<p class="p1"><span class="s1">            --kba-zemin: #f8faf8; </span></p>
-<p class="p1"><span class="s1">            --whatsapp: #25d366; </span></p>
-<p class="p1"><span class="s1">            --uyari: #d35400;</span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        body { </span></p>
-<p class="p1"><span class="s1">            font-family: 'Georgia', serif; </span></p>
-<p class="p1"><span class="s1">            background-color: var(--kba-zemin); </span></p>
-<p class="p1"><span class="s1">            display: flex; </span></p>
-<p class="p1"><span class="s1">            justify-content: center; </span></p>
-<p class="p1"><span class="s1">            align-items: center; </span></p>
-<p class="p1"><span class="s1">            min-height: 100vh; </span></p>
-<p class="p1"><span class="s1">            margin: 0; </span></p>
-<p class="p1"><span class="s1">            color: var(--kba-ana); </span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        .kapsayici { </span></p>
-<p class="p1"><span class="s1">            background: var(--kba-beyaz); </span></p>
-<p class="p1"><span class="s1">            width: 90%; </span></p>
-<p class="p1"><span class="s1">            max-width: 420px; </span></p>
-<p class="p1"><span class="s1">            border-radius: 25px; </span></p>
-<p class="p1"><span class="s1">            border: 1px solid rgba(27,77,62,0.2); </span></p>
-<p class="p1"><span class="s1">            box-shadow: 0 15px 40px rgba(0,0,0,0.06); </span></p>
-<p class="p1"><span class="s1">            padding: 35px; </span></p>
-<p class="p1"><span class="s1">            text-align: center; </span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        .ust-bolum { </span></p>
-<p class="p1"><span class="s1">            border-bottom: 1.5px solid var(--kba-ana); </span></p>
-<p class="p1"><span class="s1">            margin-bottom: 25px; </span></p>
-<p class="p1"><span class="s1">            padding-bottom: 15px; </span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        h1 { font-size: 34px; margin: 0; letter-spacing: 6px; font-weight: 400; }</span></p>
-<p class="p1"><span class="s1">        .alt-baslik { font-size: 11px; letter-spacing: 1px; margin-top: 5px; }</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        input { </span></p>
-<p class="p1"><span class="s1">            width: 100%; </span></p>
-<p class="p1"><span class="s1">            padding: 14px; </span></p>
-<p class="p1"><span class="s1">            margin: 15px 0; </span></p>
-<p class="p1"><span class="s1">            border: 1.5px solid #ddd; </span></p>
-<p class="p1"><span class="s1">            border-radius: 12px; </span></p>
-<p class="p1"><span class="s1">            box-sizing: border-box; </span></p>
-<p class="p1"><span class="s1">            font-size: 16px; </span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        .btn-aksiyon { </span></p>
-<p class="p1"><span class="s1">            background: var(--kba-ana); </span></p>
-<p class="p1"><span class="s1">            color: white; </span></p>
-<p class="p1"><span class="s1">            border: none; </span></p>
-<p class="p1"><span class="s1">            padding: 18px; </span></p>
-<p class="p1"><span class="s1">            border-radius: 12px; </span></p>
-<p class="p1"><span class="s1">            cursor: pointer; </span></p>
-<p class="p1"><span class="s1">            width: 100%; </span></p>
-<p class="p1"><span class="s1">            font-size: 17px; </span></p>
-<p class="p1"><span class="s1">            font-weight: 600; </span></p>
-<p class="p1"><span class="s1">            letter-spacing: 1px; </span></p>
-<p class="p1"><span class="s1">            transition: 0.3s; </span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        .btn-aksiyon:hover { background: #25614d; transform: translateY(-2px); }</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        .analiz-sonuc { </span></p>
-<p class="p1"><span class="s1">            margin-top: 25px; </span></p>
-<p class="p1"><span class="s1">            padding: 20px; </span></p>
-<p class="p1"><span class="s1">            display: none; </span></p>
-<p class="p1"><span class="s1">            text-align: left; </span></p>
-<p class="p1"><span class="s1">            border-radius: 15px; </span></p>
-<p class="p1"><span class="s1">            border-left: 8px solid; </span></p>
-<p class="p1"><span class="s1">            animation: ortayaCik 0.6s ease; </span></p>
-<p class="p1"><span class="s1">            line-height: 1.7; </span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        .tavsiye-box { </span></p>
-<p class="p1"><span class="s1">            margin-top: 15px; </span></p>
-<p class="p1"><span class="s1">            padding: 12px; </span></p>
-<p class="p1"><span class="s1">            background: rgba(255,255,255,0.7); </span></p>
-<p class="p1"><span class="s1">            border-radius: 8px; </span></p>
-<p class="p1"><span class="s1">            font-style: italic; </span></p>
-<p class="p1"><span class="s1">            font-size: 14px; </span></p>
-<p class="p1"><span class="s1">            color: #444; </span></p>
-<p class="p1"><span class="s1">            border: 1px dashed #ccc; </span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        .uyari-notu { </span></p>
-<p class="p1"><span class="s1">            color: var(--uyari); </span></p>
-<p class="p1"><span class="s1">            font-weight: bold; </span></p>
-<p class="p1"><span class="s1">            font-size: 13px; </span></p>
-<p class="p1"><span class="s1">            margin-top: 15px; </span></p>
-<p class="p1"><span class="s1">            border-top: 1px solid #eee; </span></p>
-<p class="p1"><span class="s1">            padding-top: 10px; </span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        .whatsapp-box { </span></p>
-<p class="p1"><span class="s1">            margin-top: 25px; </span></p>
-<p class="p1"><span class="s1">            padding: 15px; </span></p>
-<p class="p1"><span class="s1">            background: #e7f9ee; </span></p>
-<p class="p1"><span class="s1">            border-radius: 15px; </span></p>
-<p class="p1"><span class="s1">            display: none; </span></p>
-<p class="p1"><span class="s1">            border: 1px solid var(--whatsapp); </span></p>
-<p class="p1"><span class="s1">            animation: ortayaCik 0.8s ease; </span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        .btn-wa { </span></p>
-<p class="p1"><span class="s1">            background: var(--whatsapp); </span></p>
-<p class="p1"><span class="s1">            color: white; </span></p>
-<p class="p1"><span class="s1">            border: none; </span></p>
-<p class="p1"><span class="s1">            padding: 12px; </span></p>
-<p class="p1"><span class="s1">            border-radius: 10px; </span></p>
-<p class="p1"><span class="s1">            cursor: pointer; </span></p>
-<p class="p1"><span class="s1">            width: 100%; </span></p>
-<p class="p1"><span class="s1">            font-weight: bold; </span></p>
-<p class="p1"><span class="s1">            text-decoration: none; </span></p>
-<p class="p1"><span class="s1">            display: inline-block; </span></p>
-<p class="p1"><span class="s1">            margin-top: 10px; </span></p>
-<p class="p1"><span class="s1">            text-align: center; </span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        @keyframes ortayaCik { </span></p>
-<p class="p1"><span class="s1">            from { opacity: 0; transform: translateY(10px); } </span></p>
-<p class="p1"><span class="s1">            to { opacity: 1; transform: translateY(0); } </span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        .cikis-link { </span></p>
-<p class="p1"><span class="s1">            background:none; </span></p>
-<p class="p1"><span class="s1">            border:none; </span></p>
-<p class="p1"><span class="s1">            text-decoration:underline; </span></p>
-<p class="p1"><span class="s1">            cursor:pointer; </span></p>
-<p class="p1"><span class="s1">            color:#bbb; </span></p>
-<p class="p1"><span class="s1">            margin-top:25px; </span></p>
-<p class="p1"><span class="s1">            font-size: 13px; </span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        .copyright { font-size: 10px; margin-top: 30px; color: #999; letter-spacing: 1px; }</span></p>
-<p class="p1"><span class="s1">    &lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;div class="kapsayici"&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;div class="ust-bolum"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;h1&gt;KBA&lt;/h1&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;div class="alt-baslik"&gt;KENDİLİK BİLİNCİ AKADEMİSİ&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;div id="girisEkrani"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;input type="text" id="kullaniciAdi" placeholder="İsminizi Yazın..."&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;button class="btn-aksiyon" onclick="sistemiBaslat()"&gt;SİSTEME GİRİŞ&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;div id="islemEkrani" style="display:none;"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;p id="karsilama" style="font-size: 18px; font-weight: 600;"&gt;&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;button class="btn-aksiyon" onclick="zihinAnaliziYap()"&gt;ZİHİN DÜNYAMI DENETLE&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        &lt;div id="analizKutusu" class="analiz-sonuc"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        &lt;div id="whatsappKutusu" class="whatsapp-box"&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;div style="font-size: 13px; color: #1b4d3e; font-weight: bold;"&gt;🔍 Derinlemesine Analiz İstiyor musunuz?&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;div style="font-size: 12px; color: #555; margin-top: 5px;"&gt;Kişisel döngülerinizi keşfetmek ve bu yapıyı dönüştürmek için KBA Danışmanlık Hattı ile irtibata geçebilirsiniz.&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;a href="https://wa.me/905069763232" target="_blank" class="btn-wa"&gt;WhatsApp İle İletişime Geç&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        &lt;button class="cikis-link" onclick="location.reload()"&gt;Sistemden Çıkış Yap&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;div class="copyright"&gt;© 2026 KBA - TÜM HAKLARI MAHFUZDUR&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;script&gt;</span></p>
-<p class="p1"><span class="s1">    let ebcedDegeri = 0;</span></p>
-<p class="p1"><span class="s1">    const db = { "süleyman": 191, "emine": 106, "derya": 215, "selman": 181, "ayşe": 377 };</span></p>
-<p class="p1"><span class="s1">    </span></p>
-<p class="p1"><span class="s1">    const hikmetler = [</span></p>
-<p class="p1"><span class="s1">        { ad: "Güneş", ebced: 400, marifet: "Yetim hakkını korumalısın." },</span></p>
-<p class="p1"><span class="s1">        { ad: "Kamer", ebced: 441, marifet: "Ana babaya tevazulu yaklaşıp yumuşak konuşmalısın." },</span></p>
-<p class="p1"><span class="s1">        { ad: "Merih", ebced: 131, marifet: "Dosdoğru olmak adına hareket etmelisin." },</span></p>
-<p class="p1"><span class="s1">        { ad: "Utarid", ebced: 566, marifet: "İnsanların hakkını korumalısın." },</span></p>
-<p class="p1"><span class="s1">        { ad: "Müşteri", ebced: 444, marifet: "Olaylar hakkında ince fikirli olmalısın." },</span></p>
-<p class="p1"><span class="s1">        { ad: "Zühre", ebced: 566, marifet: "Emanete riayet etmeli ve ihanet etmemelisin." },</span></p>
-<p class="p1"><span class="s1">        { ad: "Zühal", ebced: 496, marifet: "İşin sonunu düşünerek hareket etmelisin." }</span></p>
-<p class="p1"><span class="s1">    ];</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    const zaaflar = {</span></p>
-<p class="p1"><span class="s1">        1: { metin: "Olaylara düz mantıkla bakıyorsun.", tavsiye: "Gördüğünün ötesindeki hikmeti fark etmek için zihnini sakinleştir ve acele karar verme." },</span></p>
-<p class="p1"><span class="s1">        2: { metin: "Çıkarcı ve kendi menfaatini gözeten bir zihin yapısındasın.", tavsiye: "Kendi yararından önce, bütünün hayrını gözetmek zihnindeki bu düğümü çözecektir." },</span></p>
-<p class="p1"><span class="s1">        3: { metin: "Hırsızlık zannı; bir şeylerin çalınacağı hırsıyla bakıyorsun.", tavsiye: "Sana ait olanın senden gitmeyeceğini, rızkın ve emanetin sahibini hatırla." },</span></p>
-<p class="p1"><span class="s1">        4: { metin: "Duygusal bir hayır beklentisiyle olayları tek taraflı yorumluyorsun.", tavsiye: "Beklentini insandan değil haktan yana tut; hayır, senin dilediğin değil, olanın içindedir." },</span></p>
-<p class="p1"><span class="s1">        5: { metin: "Şer ve kötü olacak bakış açısıyla yaklaşıyorsun.", tavsiye: "Korkularını bir kenara bırak; zannını güzele çek ki gerçeklik de hayra dönüşsün." },</span></p>
-<p class="p1"><span class="s1">        6: { metin: "'Ne derler' düşüncesi ve duygusal yoğunlukla bakıyorsun.", tavsiye: "İnsanların bakışını değil, kendi vicdanının sesini merkeze alarak özgürleş." },</span></p>
-<p class="p1"><span class="s1">        7: { metin: "Hatalı bir zeminde, tek taraflı bir muhabbet arayışındasın.", tavsiye: "İlişkilerinde samimiyeti, yanlış beklentiler üzerine değil dürüstlük üzerine inşa et." }</span></p>
-<p class="p1"><span class="s1">    };</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    function sistemiBaslat() {</span></p>
-<p class="p1"><span class="s1">        let isim = document.getElementById('kullaniciAdi').value.trim().toLowerCase();</span></p>
-<p class="p1"><span class="s1">        if(!isim) return;</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        if(db[isim]) {</span></p>
-<p class="p1"><span class="s1">            ebcedDegeri = db[isim];</span></p>
-<p class="p1"><span class="s1">        } else {</span></p>
-<p class="p1"><span class="s1">            let sor = prompt(isim + " ismi için ebced değerini girin:");</span></p>
-<p class="p1"><span class="s1">            if(!sor || isNaN(sor)) return;</span></p>
-<p class="p1"><span class="s1">            ebcedDegeri = parseInt(sor);</span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        document.getElementById('girisEkrani').style.display = 'none';</span></p>
-<p class="p1"><span class="s1">        document.getElementById('islemEkrani').style.display = 'block';</span></p>
-<p class="p1"><span class="s1">        document.getElementById('karsilama').innerText = "Hoş Geldin, " + isim.toUpperCase();</span></p>
-<p class="p1"><span class="s1">    }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    function zihinAnaliziYap() {</span></p>
-<p class="p1"><span class="s1">        const suAn = new Date();</span></p>
-<p class="p1"><span class="s1">        const kutu = document.getElementById('analizKutusu');</span></p>
-<p class="p1"><span class="s1">        const waKutusu = document.getElementById('whatsappKutusu');</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        let sira = (suAn.getDay() + suAn.getHours()) % 7;</span></p>
-<p class="p1"><span class="s1">        let gezegen = hikmetler[sira];</span></p>
-<p class="p1"><span class="s1">        let evre = (suAn.getSeconds() % 2 === 0) ? "Olur" : "Sıkıntılı";</span></p>
-<p class="p1"><span class="s1">        let mod7 = (ebcedDegeri + gezegen.ebced) % 7;</span></p>
-<p class="p1"><span class="s1">        if(mod7 === 0) mod7 = 7;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        kutu.style.display = "block";</span></p>
-<p class="p1"><span class="s1">        waKutusu.style.display = "block";</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        if(evre === "Olur") {</span></p>
-<p class="p1"><span class="s1">            kutu.style.backgroundColor = "#effaf1"; </span></p>
-<p class="p1"><span class="s1">            kutu.style.borderColor = "#27ae60";</span></p>
-<p class="p1"><span class="s1">            kutu.innerHTML = `</span></p>
-<p class="p1"><span class="s1">                &lt;strong style="color:#1b4d3e"&gt;ZİHİN DURUMU (Dengeli):&lt;/strong&gt;&lt;br&gt;</span></p>
-<p class="p1"><span class="s1">                Şu an zihnindeki işleyiş mantığı: &lt;b&gt;"${gezegen.marifet}"&lt;/b&gt; ilkesiyle uyumlu ve dengeli.</span></p>
-<p class="p1"><span class="s1">            `;</span></p>
-<p class="p1"><span class="s1">        } else {</span></p>
-<p class="p1"><span class="s1">            kutu.style.backgroundColor = "#fff9f0"; </span></p>
-<p class="p1"><span class="s1">            kutu.style.borderColor = "#e67e22";</span></p>
-<p class="p1"><span class="s1">            kutu.innerHTML = `</span></p>
-<p class="p1"><span class="s1">                &lt;strong style="color:#d35400"&gt;ZİHİN DURUMU (Hatalı Bakış):&lt;/strong&gt;&lt;br&gt;</span></p>
-<p class="p1"><span class="s1">                Zihnin şu an &lt;b&gt;"${zaaflar[mod7].metin}"&lt;/b&gt; tuzağına düşmüş durumda.&lt;br&gt;</span></p>
-<p class="p1"><span class="s1">                &lt;div class="tavsiye-box"&gt;&lt;b&gt;Yapıcı Öneri:&lt;/b&gt; ${zaaflar[mod7].tavsiye}&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                &lt;div class="uyari-notu"&gt;Duygusal yaklaşımlar sorunu çözmez, aksine büyütür. Lütfen itidalin getirisi olan erdemli davranışları tercih edin.&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                &lt;br&gt;&lt;strong&gt;DÜZELTME İLKESİ:&lt;/strong&gt; ${gezegen.marifet}</span></p>
-<p class="p1"><span class="s1">            `;</span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">    }</span></p>
-<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+
+<div class="app-container">
+    <div id="sc1" class="screen active">
+        <div class="logo">KBA</div>
+        <div class="kba-sub">Kendilik Bilinci Akademisi</div>
+        <p style="font-size: 20px; color: #aaa;">"İçselliğin ve Dışsallığın Birleştiği Noktaya Yolculuk..."</p>
+        <button class="btn" onclick="show(2)">GİRİŞ YAP</button>
+    </div>
+
+    <div id="sc2" class="screen">
+        <h3 style="color: var(--gold);">KBA ANALİZ MANİFESTOSU</h3>
+        <div class="manifesto-box">
+            "Bu sistem bir kehanet aracı değil, irade terbiyesi rehberidir. İsminizin frekansı ile zamanın Hicri devinimleri arasındaki matematiksel uyumu okur. Hedefimiz; 'Bile Bile Zaaf' alanlarınızı fark ettirerek sizi İtidal makamına taşımaktır."
+        </div>
+        <button class="btn" onclick="show(3)">KABUL EDİYORUM</button>
+    </div>
+
+    <div id="sc3" class="screen">
+        <h3 style="color: var(--gold);">BİLGİLERİNİZİ MÜHÜRLEYİN</h3>
+        <input type="text" id="uName" placeholder="Adınız ve Soyadınız">
+        <input type="date" id="uDate">
+        <br>
+        <button class="btn" onclick="runAnalysis()">ANALİZİ BAŞLAT</button>
+    </div>
+
+    <div id="sc4" class="screen">
+        <h2 id="zodiacInfo" style="color: var(--gold);"></h2>
+        <div class="grid-container" id="nodes"></div>
+        <div id="details"></div>
+        <button class="btn" onclick="show(5)" style="margin-top: 30px;">ÖZET VE REHBERLİK</button>
+    </div>
+
+    <div id="sc5" class="screen">
+        <h3 style="color: var(--gold);">TEKAMÜL REHBERİ</h3>
+        <div id="finalSummary" style="text-align: left; padding: 20px; line-height: 1.8;"></div>
+        <div class="manifesto-box" style="font-size: 16px;">
+            <strong>DANIŞMANLIK NOTU:</strong> İsmi Azam ve Olmaz evrelerindeki kilitleri açmak, fıtratınızdaki Esma terkiplerini 'İtidal' üzere çalıştırmak için bizimle iletişime geçebilirsiniz. Kendilik Bilinci Akademisi her zaman yanınızdadır.
+        </div>
+        <div class="logo" style="font-size: 35px; margin-top: 20px;">KBA</div>
+        <button class="btn" onclick="location.reload()">YENİ ANALİZ</button>
+        <button class="btn" style="background: #333; color: white;" onclick="alert('İraden kavi, yolun açık olsun Süleyman.')">GÜLE GÜLE</button>
+    </div>
+
+    <footer>
+        Bu uygulama bir <strong>Kendilik Bilinci Akademisi</strong> çalışmasıdır.<br>
+        Tüm Hakları Mahfuzdur © 2026 | "Kendini Bilmek, Hakk'ı Bilmektir."
+    </footer>
+</div>
+
+<script>
+    const systemData = [
+        { id: 1, g: "Mars", t: "Şahsiyet", k: [1, 3, 2], p: "Mars" },
+        { id: 2, g: "Venüs", t: "Rızık", k: [1, 2, 3], p: "Venus" },
+        { id: 3, g: "Merkür", t: "İletişim", k: [3, 2, 1], p: "Mercury" },
+        { id: 4, g: "Ay", t: "Aile", k: [1, 3, 2], p: "Moon" },
+        { id: 5, g: "Güneş", t: "Neşe", k: [1, 2, 3], p: "Sun" },
+        { id: 6, g: "Merkür", t: "Hizmet", k: [3, 2, 1], p: "Mercury" },
+        { id: 7, g: "Mars", t: "Ortaklık", k: [1, 3, 2], p: "Mars" },
+        { id: 8, g: "Venüs", t: "Dönüşüm", k: [1, 2, 3], p: "Venus" },
+        { id: 9, g: "Jüpiter", t: "Vizyon", k: [1, 2, 3], p: "Jupiter" },
+        { id: 10, g: "Satürn", t: "Kariyer", k: [1, 2, 2], p: "Saturn" },
+        { id: 11, g: "Satürn", t: "Sosyal", k: [1, 2, 2], p: "Saturn" },
+        { id: 12, g: "Jüpiter", t: "Bilinç", k: [1, 2, 3], p: "Jupiter" }
+    ];
+
+    let userResults = [];
+
+    function show(s) {
+        document.querySelectorAll('.screen').forEach(e => e.classList.remove('active'));
+        document.getElementById('sc' + s).classList.add('active');
+    }
+
+    function runAnalysis() {
+        const name = document.getElementById('uName').value;
+        const date = document.getElementById('uDate').value;
+        if(!name || !date) return alert("Bilgileri eksiksiz giriniz.");
+
+        const kod = (name.length % 9) || 9;
+        document.getElementById('zodiacInfo').innerText = name + ", Burcunuzun Asaletiyle Hoş Geldiniz.";
+        
+        let nodes = document.getElementById('nodes');
+        nodes.innerHTML = "";
+        userResults = [];
+
+        systemData.forEach((h, i) => {
+            let d = new Date(date);
+            d.setMonth(d.getMonth() + i);
+            let gun = (d.getDate() + (d.getMonth() * 3)) % 30 || 30; // KBA Progresyonu
+            let evreIdx = Math.ceil(gun / 10) - 1;
+            let evreKod = h.k[evreIdx];
+            
+            let status = evreKod === 1 ? "OLUR" : (evreKod === 2 ? "SIKINTILI" : "OLMAZ");
+            if (kod === 2 && h.id === 10) status = "İSMI AZAM";
+
+            userResults.push({ ...h, status, gun });
+            nodes.innerHTML += `<div class="house-node" onclick="viewHouse(${i})">${i+1}. EV<br><small>${h.t}</small></div>`;
+        });
+        show(4);
+    }
+
+    function viewHouse(i) {
+        const data = userResults[i];
+        const planetImgQuery = ``;
+        let cls = data.status === "OLUR" ? "bg-olur" : (data.status === "SIKINTILI" ? "bg-sikinti" : (data.status === "OLMAZ" ? "bg-olmaz" : "bg-azam"));
+        
+        let info = data.status === "OLUR" ? "İrade ve zaman bir olmuş. Doğal başarı." : 
+                   data.status === "SIKINTILI" ? "Yaşam alanı düzenleme bekliyor. Dirayet onarılmalı." : 
+                   data.status === "İSMI AZAM" ? "MUTLAK KİLİT: Bu ev en büyük tekamül sınavındır." : "BİLE BİLE ZAAF: Nefsi tercihlerine uyanık ol.";
+
+        document.getElementById('details').innerHTML = `
+            <div class="detail-view">
+                <div style="flex:1">
+                    <h3>${i+1}. Ev: ${data.t}</h3>
+                    <p>Yönetici: <strong>${data.g}</strong></p>
+                    <p>Frekans Durumu: <span class="badge ${cls}">${data.status}</span></p>
+                    <p style="font-style:italic; color:#aaa;">${info}</p>
+                </div>
+                <div style="text-align:center;">
+                    ${planetImgQuery}<br>
+                    <small style="color:var(--gold)">${data.g} Enerjisi</small>
+                </div>
+            </div>`;
+    }
+
+    function showSummary() {
+        let sumHtml = "<ul>";
+        userResults.forEach(r => {
+            if(r.status !== "OLUR") {
+                sumHtml += `<li><strong>${r.t} Sahası:</strong> ${r.status} - İtidal ile onarılmalı.</li>`;
+            }
+        });
+        sumHtml += "</ul>";
+        document.getElementById('finalSummary').innerHTML = sumHtml;
+    }
+</script>
 </body>
 </html>
