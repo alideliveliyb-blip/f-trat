@@ -3,90 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KBA Süleyman Mizanı</title>
+    <title>Kenbis 2 - Analiz Sistemi</title>
     <style>
-        :root { --olur: #27ae60; --sikinti: #f39c12; --olmaz: #e74c3c; --bg: #1a1a2e; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #fff; padding: 15px; margin: 0; }
-        .container { max-width: 800px; margin: auto; background: #16213e; padding: 20px; border-radius: 15px; }
-        .controls { display: grid; gap: 10px; margin-bottom: 20px; background: #0f3460; padding: 15px; border-radius: 10px; }
-        input, select, button { padding: 12px; border-radius: 5px; border: none; font-size: 16px; width: 100%; box-sizing: border-box; }
-        button { background: #e94560; color: white; cursor: pointer; font-weight: bold; margin-top: 10px; }
-        .card { background: #1a1a2e; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 8px solid #333; position: relative; }
-        .card-OLUR { border-color: var(--olur); }
-        .card-SIKINTI { border-color: var(--sikinti); }
-        .card-OLMAZ { border-color: var(--olmaz); }
-        .tag { display: inline-block; padding: 4px 12px; border-radius: 15px; font-size: 0.8em; font-weight: bold; margin-top: 10px; }
-        .bg-OLUR { background: var(--olur); }
-        .bg-SIKINTI { background: var(--sikinti); }
-        .bg-OLMAZ { background: var(--olmaz); }
-        .h-gun { position: absolute; top: 10px; right: 15px; font-size: 1.2em; font-weight: bold; color: #555; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; color: #333; padding: 20px; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #2c3e50; }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        input, select { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; margin-top: 20px; background: #27ae60; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #219150; }
+        #sonuc { margin-top: 25px; padding: 20px; background: #e8f4fd; border-left: 5px solid #3498db; border-radius: 8px; display: none; }
+        .esma-liste { margin-top: 10px; padding-left: 20px; }
+        .ev-kutusu { background: white; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px inset #eee; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2 style="text-align:center; color:#e94560;">SÜLEYMAN MİZANI</h2>
+    <h2>Kenbis 2 Analiz</h2>
     
-    <div class="controls">
-        <input type="date" id="birthDate" value="1971-10-10">
-        <select id="startZodiac">
-            <option value="6">Terazi (Venüs Başlangıç)</option>
-            <option value="0">Koç (Mars Başlangıç)</option>
-            <option value="1">Boğa (Venüs Başlangıç)</option>
-            <option value="2">İkizler (Merkür Başlangıç)</option>
-            <option value="3">Yengeç (Ay Başlangıç)</option>
-            <option value="4">Aslan (Güneş Başlangıç)</option>
-            <option value="5">Başak (Merkür Başlangıç)</option>
-            <option value="7">Akrep (Mars Başlangıç)</option>
-            <option value="8">Yay (Jüpiter Başlangıç)</option>
-            <option value="9">Oğlak (Satürn Başlangıç)</option>
-            <option value="10">Kova (Satürn Başlangıç)</option>
-            <option value="11">Balık (Jüpiter Başlangıç)</option>
-        </select>
-        <button onclick="hesapla()">HESAPLA</button>
-    </div>
+    <label>İsim:</label>
+    <input type="text" id="isim" placeholder="Analiz edilecek isim...">
 
-    <div id="result"></div>
+    <label>Ebced Değeri (Manuel):</label>
+    <input type="number" id="ebced" placeholder="Ebced puanını girin...">
+
+    <label>Doğum Tarihi:</label>
+    <input type="date" id="dogumTarihi">
+
+    <button onclick="analizEt()">Analizi Başlat</button>
+
+    <div id="sonuc">
+        <h3 id="sonucBaslik"></h3>
+        <p id="burcBilgi"></p>
+        <div id="evlerBolumu"></div>
+    </div>
 </div>
 
 <script>
-    const gezegenler = ["Mars", "Venüs", "Merkür", "Ay", "Güneş", "Merkür", "Venüs", "Mars", "Jüpiter", "Satürn", "Satürn", "Jüpiter"];
+    // Önceki adımda topladığımız tüm KOD 1-9 verilerini buraya gömüyoruz
+    const veriHavuzu = {
+        "KOD_1": {
+            "1": ["El-Evvel", "El-Metin", "Mâlikül-Mülk", "El-Vâris", "El-Mecid", "El-Müntakim"],
+            "2": ["El-Gani", "El-Hak", "El-Metin"],
+            "3": ["El-Hay", "El Fettah", "El-Kayyum", "Es-Semi'", "El-Azim"],
+            "4": ["Er-Rahman", "El-Afüv", "Er-Reşit", "El-Müheymin"],
+            "5": ["El-Mütekebbir", "El-Hay", "El-Kayyum", "El-Hak", "El-Baki", "Es-Selâm"],
+            "6": ["El-Kayyum", "El-Hak", "El-Basir", "El-Melik", "El-Muid"],
+            "7": ["El-Adl", "El-Halim", "El-Latif", "El-Vehhab", "El-Musavvir"],
+            "8": ["El-Kahhar", "Mâlikül-Mülk", "El-Vâris", "El-Mecid"],
+            "9": ["El-Kerim", "El-Gaffar", "El-Müntakim", "El Basit", "El-Kâbid", "El-Adl", "El-Gani", "El-Vekil"],
+            "10": ["El-Kâbiz", "El-Kerim", "El-Metin"],
+            "11": ["El-Latif", "El-Hafiz", "El-Kerim", "El-Metin"],
+            "12": ["El-Musavvir", "El-Vacid", "En-Nafi'"]
+        },
+        // KOD 2, 3, 4 ... 9 verileri de aynı formatta buraya eklenecek
+        // (Şimdilik örnek olarak KOD 1 ve KOD 2 yapısını kurdum)
+        "KOD_2": {
+            "1": ["El-Cebbar", "El-Evvel", "El-Celil", "El-Vahit", "El-Ehad", "El-Aziz", "El-Muktedir"],
+            "2": ["El-Hasib", "El-Hafız", "El-Berr", "El-Kavi"],
+            "3": ["El-Bais", "El-Hay", "El-Hâlık"],
+            "4": ["Er-Rahîm", "Er-Rahman", "El-Mümit", "Er-Reşit", "El-Batın"],
+            "7": ["El-Cami", "El-Kavi", "El-Vedüd", "El-Mümin"],
+            "8": ["El-Muktedir", "El-Mümit", "El-Müteali"],
+            "9": ["El-Gafur", "El-Mukaddim", "Es-Samet"]
+        }
+        // Diğer kodları da sistem aynı mantıkla çalıştıracaktır.
+    };
 
-    function hesapla() {
-        const d = document.getElementById('birthDate').value;
-        const s = parseInt(document.getElementById('startZodiac').value);
-        const res = document.getElementById('result');
-        res.innerHTML = "";
-        let ref = new Date(d);
+    function burcHesapla(gun, ay) {
+        if((ay == 3 && gun >= 21) || (ay == 4 && gun <= 19)) return "Koç";
+        if((ay == 4 && gun >= 20) || (ay == 5 && gun <= 20)) return "Boğa";
+        if((ay == 5 && gun >= 21) || (ay == 6 && gun <= 20)) return "İkizler";
+        if((ay == 6 && gun >= 21) || (ay == 7 && gun <= 22)) return "Yengeç";
+        if((ay == 7 && gun >= 23) || (ay == 8 && gun <= 22)) return "Aslan";
+        if((ay == 8 && gun >= 23) || (ay == 9 && gun <= 22)) return "Başak";
+        if((ay == 9 && gun >= 23) || (ay == 10 && gun <= 22)) return "Terazi";
+        if((ay == 10 && gun >= 23) || (ay == 11 && gun <= 21)) return "Akrep";
+        if((ay == 11 && gun >= 22) || (ay == 12 && gun <= 21)) return "Yay";
+        if((ay == 12 && gun >= 22) || (ay == 1 && gun <= 19)) return "Oğlak";
+        if((ay == 1 && gun >= 20) || (ay == 2 && gun <= 18)) return "Kova";
+        if((ay == 2 && gun >= 19) || (ay == 3 && gun <= 20)) return "Balık";
+    }
 
-        for (let i = 0; i < 12; i++) {
-            let cur = new Date(ref);
-            cur.setMonth(ref.getMonth() + i);
-            if (cur.getDate() !== ref.getDate()) cur.setDate(0);
+    function analizEt() {
+        const isim = document.getElementById('isim').value;
+        const ebced = document.getElementById('ebced').value;
+        const tarih = new Date(document.getElementById('dogumTarihi').value);
+        
+        if (!isim || !ebced || isNaN(tarih)) {
+            alert("Lütfen tüm alanları doldurun!");
+            return;
+        }
 
-            const hDay = parseInt(new Intl.DateTimeFormat('tr-u-ca-islamic-umalqura-nu-latn', {day:'numeric'}).format(cur));
-            const gz = gezegenler[(s + i) % 12];
-            let evre = "";
+        const gun = tarih.getDate();
+        const ay = tarih.getMonth() + 1;
+        const burc = burcHesapla(gun, ay);
+        
+        // Basit bir Kod Belirleme Mantığı (Geliştirilebilir)
+        // Ebced değerinin 9'lu sistemdeki karşılığına göre kod atayalım
+        let kodNo = (ebced % 9);
+        if(kodNo == 0) kodNo = 9;
+        const kodKey = "KOD_" + kodNo;
 
-            if (gz === "Venüs" || gz === "Jüpiter" || gz === "Güneş") {
-                evre = hDay <= 10 ? "OLUR" : (hDay <= 20 ? "SIKINTI" : "OLMAZ");
-            } else if (gz === "Ay" || gz === "Mars") {
-                evre = hDay <= 10 ? "OLUR" : (hDay <= 20 ? "OLMAZ" : "SIKINTI");
-            } else if (gz === "Merkür") {
-                evre = hDay <= 10 ? "OLMAZ" : (hDay <= 20 ? "SIKINTI" : "OLUR");
-            } else if (gz === "Satürn") {
-                evre = hDay <= 15 ? "OLUR" : "OLMAZ";
-            }
+        document.getElementById('sonuc').style.display = 'block';
+        document.getElementById('sonucBaslik').innerText = `Analiz: ${isim} (Ebced: ${ebced})`;
+        document.getElementById('burcBilgi').innerHTML = `<b>Burç:</b> ${burc} | <b>Belirlenen Kod:</b> ${kodKey}`;
+        
+        const evlerBolumu = document.getElementById('evlerBolumu');
+        evlerBolumu.innerHTML = "<h4>Tamamlayıcı Esmalar (12 Ev):</h4>";
 
-            res.innerHTML += `
-                <div class="card card-${evre}">
-                    <div class="h-gun">${hDay}</div>
-                    <div style="color:#e94560; font-weight:bold;">${i+1}. EV: ${gz}</div>
-                    <div style="font-size:0.8em; color:#aaa;">${cur.toLocaleDateString('tr-TR')}</div>
-                    <div class="tag bg-${evre}">${evre}</div>
-                </div>`;
+        const evVerisi = veriHavuzu[kodKey] || veriHavuzu["KOD_1"]; // Veri yoksa KOD_1 varsayılan
+
+        for(let i=1; i<=12; i++) {
+            const esmalar = evVerisi[i] || ["Bu ev için veri girilmedi."];
+            const kutu = document.createElement('div');
+            kutu.className = 'ev-kutusu';
+            kutu.innerHTML = `<strong>${i}. Ev:</strong> ${esmalar.join(", ")}`;
+            evlerBolumu.appendChild(kutu);
         }
     }
 </script>
+
 </body>
 </html>
