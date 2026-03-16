@@ -3,37 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Süleyman KBA - Birleşik Mizan</title>
+    <title>KBA Süleyman Mizanı</title>
     <style>
-        :root { --olur: #27ae60; --sikinti: #f39c12; --olmaz: #e74c3c; --bg: #0f172a; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #e2e8f0; padding: 10px; margin: 0; }
-        .main-container { max-width: 500px; margin: auto; background: #1e293b; padding: 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .input-section { background: #334155; padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #475569; }
-        input, select, button { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: none; font-size: 16px; box-sizing: border-box; }
-        button { background: #ef4444; color: white; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .result-card { background: #0f172a; padding: 15px; border-radius: 12px; margin-bottom: 12px; border-left: 8px solid #475569; position: relative; }
-        .card-OLUR { border-left-color: var(--olur); }
-        .card-SIKINTI { border-left-color: var(--sikinti); }
-        .card-OLMAZ { border-left-color: var(--olmaz); }
-        .terkip-box { background: #1e293b; padding: 10px; border-radius: 8px; margin-top: 10px; border: 1px dashed #475569; }
-        .tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.8em; font-weight: bold; margin-bottom: 5px; }
+        :root { --olur: #27ae60; --sikinti: #f39c12; --olmaz: #e74c3c; --bg: #1a1a2e; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #fff; padding: 15px; margin: 0; }
+        .container { max-width: 800px; margin: auto; background: #16213e; padding: 20px; border-radius: 15px; }
+        .controls { display: grid; gap: 10px; margin-bottom: 20px; background: #0f3460; padding: 15px; border-radius: 10px; }
+        input, select, button { padding: 12px; border-radius: 5px; border: none; font-size: 16px; width: 100%; box-sizing: border-box; }
+        button { background: #e94560; color: white; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        .card { background: #1a1a2e; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 8px solid #333; position: relative; }
+        .card-OLUR { border-color: var(--olur); }
+        .card-SIKINTI { border-color: var(--sikinti); }
+        .card-OLMAZ { border-color: var(--olmaz); }
+        .tag { display: inline-block; padding: 4px 12px; border-radius: 15px; font-size: 0.8em; font-weight: bold; margin-top: 10px; }
         .bg-OLUR { background: var(--olur); }
         .bg-SIKINTI { background: var(--sikinti); }
         .bg-OLMAZ { background: var(--olmaz); }
-        .arabi-gun { position: absolute; top: 10px; right: 15px; font-weight: bold; color: #475569; }
+        .h-gun { position: absolute; top: 10px; right: 15px; font-size: 1.2em; font-weight: bold; color: #555; }
     </style>
 </head>
 <body>
 
-<div class="main-container">
-    <h2 style="text-align:center; color:#ef4444; margin-bottom:5px;">SÜLEYMAN MİZANI</h2>
-    <p style="text-align:center; font-size:0.8em; color:#94a3b8; margin-bottom:15px;">Evre ve Esma Terkibi Birleşik Panel</p>
+<div class="container">
+    <h2 style="text-align:center; color:#e94560;">SÜLEYMAN MİZANI</h2>
     
-    <div class="input-section">
-        Doğum Tarihi: <input type="date" id="tarih" value="1971-10-10">
-        İsim Ebced Değeri: <input type="number" id="ebced" value="0" placeholder="Ebced giriniz">
-        Burç/Ev Başlangıcı: 
-        <select id="baslangic">
+    <div class="controls">
+        <input type="date" id="birthDate" value="1971-10-10">
+        <select id="startZodiac">
             <option value="6">Terazi (Venüs Başlangıç)</option>
             <option value="0">Koç (Mars Başlangıç)</option>
             <option value="1">Boğa (Venüs Başlangıç)</option>
@@ -47,55 +43,47 @@
             <option value="10">Kova (Satürn Başlangıç)</option>
             <option value="11">Balık (Jüpiter Başlangıç)</option>
         </select>
-        <button onclick="mizaniCalistir()">HESAPLA VE BİRLEŞTİR</button>
+        <button onclick="hesapla()">HESAPLA</button>
     </div>
 
-    <div id="sonucAlani"></div>
+    <div id="result"></div>
 </div>
 
 <script>
     const gezegenler = ["Mars", "Venüs", "Merkür", "Ay", "Güneş", "Merkür", "Venüs", "Mars", "Jüpiter", "Satürn", "Satürn", "Jüpiter"];
 
-    function mizaniCalistir() {
-        const d = document.getElementById('tarih').value;
-        const ebced = parseInt(document.getElementById('ebced').value) || 0;
-        const bas = parseInt(document.getElementById('baslangic').value);
-        const cikti = document.getElementById('sonucAlani');
-        cikti.innerHTML = "";
-        let refTarih = new Date(d);
+    function hesapla() {
+        const d = document.getElementById('birthDate').value;
+        const s = parseInt(document.getElementById('startZodiac').value);
+        const res = document.getElementById('result');
+        res.innerHTML = "";
+        let ref = new Date(d);
 
         for (let i = 0; i < 12; i++) {
-            let evTarihi = new Date(refTarih);
-            evTarihi.setMonth(refTarih.getMonth() + i);
-            if (evTarihi.getDate() !== refTarih.getDate()) evTarihi.setDate(0);
+            let cur = new Date(ref);
+            cur.setMonth(ref.getMonth() + i);
+            if (cur.getDate() !== ref.getDate()) cur.setDate(0);
 
-            const hGun = parseInt(new Intl.DateTimeFormat('tr-u-ca-islamic-umalqura-nu-latn', {day:'numeric'}).format(evTarihi));
-            const gz = gezegenler[(bas + i) % 12];
+            const hDay = parseInt(new Intl.DateTimeFormat('tr-u-ca-islamic-umalqura-nu-latn', {day:'numeric'}).format(cur));
+            const gz = gezegenler[(s + i) % 12];
             let evre = "";
 
-            // --- EVRE MANTIKLARI (Senin Kuralların) ---
             if (gz === "Venüs" || gz === "Jüpiter" || gz === "Güneş") {
-                evre = hGun <= 10 ? "OLUR" : (hGun <= 20 ? "SIKINTI" : "OLMAZ");
+                evre = hDay <= 10 ? "OLUR" : (hDay <= 20 ? "SIKINTI" : "OLMAZ");
             } else if (gz === "Ay" || gz === "Mars") {
-                evre = hGun <= 10 ? "OLUR" : (hGun <= 20 ? "OLMAZ" : "SIKINTI");
+                evre = hDay <= 10 ? "OLUR" : (hDay <= 20 ? "OLMAZ" : "SIKINTI");
             } else if (gz === "Merkür") {
-                evre = hGun <= 10 ? "OLMAZ" : (hGun <= 20 ? "SIKINTI" : "OLUR");
+                evre = hDay <= 10 ? "OLMAZ" : (hDay <= 20 ? "SIKINTI" : "OLUR");
             } else if (gz === "Satürn") {
-                evre = hGun <= 15 ? "OLUR" : "OLMAZ";
+                evre = hDay <= 15 ? "OLUR" : "OLMAZ";
             }
 
-            // --- ESMA TERKİBİ MANTIGI (Sayısal Birleşim) ---
-            const terkipKodu = ebced + (i + 1);
-
-            cikti.innerHTML += `
-                <div class="result-card card-${evre}">
-                    <div class="arabi-gun">A:${hGun}</div>
+            res.innerHTML += `
+                <div class="card card-${evre}">
+                    <div class="h-gun">${hDay}</div>
+                    <div style="color:#e94560; font-weight:bold;">${i+1}. EV: ${gz}</div>
+                    <div style="font-size:0.8em; color:#aaa;">${cur.toLocaleDateString('tr-TR')}</div>
                     <div class="tag bg-${evre}">${evre}</div>
-                    <div style="font-weight:bold; font-size:1.1em; color:#f8fafc;">${i+1}. EV (${gz})</div>
-                    <div class="terkip-box">
-                        <span style="color:#94a3b8; font-size:0.9em;">Terkip Sayısal Kodu:</span><br>
-                        <span style="font-size:1.2em; color:#fbbf24; font-weight:bold;">${terkipKodu}</span>
-                    </div>
                 </div>`;
         }
     }
